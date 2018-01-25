@@ -1,6 +1,10 @@
 # Simple Multicellularity Project
 
-## NOTUNG
+## FASTA fájlok kinyújtése
+
+A "Species list and source" excel fájl a driveon tartalmazza a letöltött FASTA fájlok forrásait és elnevezéseit
+
+## NOTUNG (OUTDATED)
 
 Először megnyitjuk Notungba a fajfát és Display Options -> Display Internal Node Names és elmentjük NEWICK formátumba (species.tree.nwk)
 
@@ -36,9 +40,9 @@ scripts/Notung_stats.R
 scripts/Notung_stats_functional_groups.R
 ```
 
-## SILIX, HIFIX klaszterezés
+## SILIX, HIFIX klaszterezés (OUTDATED)
 
-### All vs All BLAST (JELENLEG)
+### All vs All BLAST
 
 El kell végezni az all vs all BLAST-ot a klaszerezéshez
 
