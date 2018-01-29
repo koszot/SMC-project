@@ -1,8 +1,28 @@
 # Simple Multicellularity Project
 
-## FASTA fájlok kinyújtése
+# Proteome összegyűjtése
 
-A "Species list and source" excel fájl a driveon tartalmazza a letöltött FASTA fájlok forrásait és elnevezéseit
+A raw proteome-ok a __raw_fasta_files__ mappában vannak, és itt található a __taxonlist.xls__ fájl is ami a hivatkozásokat tartalmazza.
+
+A __raw_FASTA_correction.R__ script segítésével átalakítjuk a headereket és a fasta fájlok neveit majd a __fixed_fasta_files__ mappában helyezzük el őket. Majd összecatoljuk a __71_genomes.fasta__ fájlba az összes faj proteomeját.
+
+__75508_Picst3__ : ki lett törölve a __71_genomes.fasta__ fájlból mert a header alatt nem volt szekvencia és a raw fájlban visszakeresve is üres volt a header alatti terület
+
+# All vs All BLAST
+
+El kell végezni az all vs all BLAST-ot a klaszerezéshez
+
+```
+nohup mpiformatdb -N 64 -i 71_genomes.fasta -o T &
+mv 71_genomes.fasta.* ../share/
+nohup mpirun -n 64 mpiblast -d 71_genomes.fasta -i 71_genomes.fasta -p blastp -m 8 -o 71_genomes_blasted --copy-via=none &
+```
+
+
+
+
+
+
 
 ## NOTUNG (OUTDATED)
 
@@ -40,28 +60,6 @@ scripts/Notung_stats.R
 scripts/Notung_stats_functional_groups.R
 ```
 
-## SILIX, HIFIX klaszterezés (OUTDATED)
 
-### All vs All BLAST
-
-El kell végezni az all vs all BLAST-ot a klaszerezéshez
-
-```
-nohup mpiformatdb -N 64 -i SMC_project_allgenomes.fasta -o T &
-mv SMC_project_allgenomes.fasta.* ../share/
-nohup mpirun -n 32 mpiblast -d SMC_project_allgenomes.fasta -i SMC_project_allgenomes.fasta -p blastp -m 8 -o SMC_project_allgenomes_blasted --copy-via=none &
-```
-
-### selenocystein
-
-U_to_X.R
-
-### Silix a Hifix-hez
-
-silix SMC_project_allgenomes.fasta SMC_project_allgenomes_blasted --net > SMC_project_SLX.fnodes
-
-### Hifix
-
-hifix -t 64 SMC_project_allgenomes.fasta SMC_project_allgenomes_blasted.net SMC_project_SLX.fnodes> SMC_project_HFX.fnodes
 
 
