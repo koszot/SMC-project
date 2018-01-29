@@ -7,17 +7,24 @@ A raw proteome-ok a __raw_fasta_files__ mappában vannak, és itt található a 
 A __raw_FASTA_correction.R__ script segítésével átalakítjuk a headereket és a fasta fájlok neveit majd a __fixed_fasta_files__ mappában helyezzük el őket. Majd összecatoljuk a __71_genomes.fasta__ fájlba az összes faj proteomeját.
 
 __75508_Picst3__ : ki lett törölve a __71_genomes.fasta__ fájlból mert a header alatt nem volt szekvencia és a raw fájlban visszakeresve is üres volt a header alatti terület
+__79291_Picst3__ : ki lett törölve a __71_genomes.fasta__ fájlból mert a header alatt nem volt szekvencia és a raw fájlban visszakeresve is üres volt a header alatti terület
 
 # All vs All BLAST
 
 El kell végezni az all vs all BLAST-ot a klaszerezéshez
 
+Local cluster :
 ```
 nohup mpiformatdb -N 64 -i 71_genomes.fasta -o T &
 mv 71_genomes.fasta.* ../share/
-nohup mpirun -n 64 mpiblast -d 71_genomes.fasta -i 71_genomes.fasta -p blastp -m 8 -o 71_genomes_blasted --copy-via=none &
+nohup mpirun -n 32 mpiblast -d 71_genomes.fasta -i 71_genomes.fasta -p blastp -m 8 -o 71_genomes_blasted --copy-via=none &
 ```
-
+HPC-Szeged:
+```
+mpiformatdb -N 192 -i 71_genomes.fasta -o T
+mv 71_genomes.fasta.* ../share/
+mpirun -n 192 mpiblast -d 71_genomes.fasta -i 71_genomes.fasta -p blastp -m 8 -o 71_genomes_blasted --copy-via=none
+```
 
 
 
