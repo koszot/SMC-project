@@ -31,6 +31,7 @@ mpirun -n 192 mpiblast -d 71_genomes.fasta -i 71_genomes.fasta -p blastp -m 8 -o
 
 
 
+
 ## NOTUNG (OUTDATED)
 
 Először megnyitjuk Notungba a fajfát és Display Options -> Display Internal Node Names és elmentjük NEWICK formátumba (species.tree.nwk)
