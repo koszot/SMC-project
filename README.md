@@ -26,11 +26,20 @@ mv 71_genomes.fasta.* ../share/
 mpirun -n 192 mpiblast -d 71_genomes.fasta -i 71_genomes.fasta -p blastp -m 8 -o 71_genomes_blasted --copy-via=none
 ```
 
+# HIFIX klaszterezés
 
-
-
-
-
+A klaszerezéshez először meg kell nézni, hogy az összes selenocisteine át lett-e alakítva X-re.
+```
+U_to_X.R
+```
+SILIX
+```
+silix 71_genomes_fixed.fasta 71_genomes_blasted_03_06 --net > 71_genomes_SLX.fnodes
+```
+HIFIX
+```
+hifix -t 48 71_genomes_fixed.fasta 71_genomes_blasted_03_06.net 71_genomes_SLX.fnodes > 71_genomes_HFX.fnodes
+```
 
 ## NOTUNG (OUTDATED)
 
